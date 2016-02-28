@@ -1,0 +1,17 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/Mighty M-Editor/packages.config
+/Mighty M-Editor/bin/Debug
+/Mighty M-Editor/obj/Debug
+/Mighty M-Editor/App.config
+/.vs/Mighty M-Editor/v14
+/Mighty M-Editor.sln.ide
+/packages
+/Mighty M-Editor.v12.suo
+/Mighty M-Editor.v14.suo
+/Mighty M-Helper/bin/Debug
+/Mighty M-Helper/obj/Debug
+/Mighty M-Helper/App.config
+/Mighty M-Helper/packages.config
