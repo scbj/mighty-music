@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Mighty_Music.Styles">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Default\WindowStyle.xaml"/>
+        <ResourceDictionary Source="Default\ButtonStyle.xaml"/>
+        <ResourceDictionary Source="Default\TextBoxStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

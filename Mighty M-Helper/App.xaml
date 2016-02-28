@@ -19,7 +19,13 @@
                         </ControlTemplate.Resources>
 
                         <Border x:Name="border" CornerRadius="2" BorderThickness="2" Background="#FF595959" BorderBrush="DimGray">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,5,16,8"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,5,16,8">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextDecorations" Value="Underline" />
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Border>
 
                         <ControlTemplate.Triggers>
