@@ -31,7 +31,15 @@ namespace Mighty_Music.Views
 
         public MainView()
         {
+            DataContext = ViewModel = new MainViewModel();
             InitializeComponent();
+            ViewModel.View = this;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewModel.CurrentMusicFile != null)
+                ViewModel.SearchCover();
         }
     }
 }

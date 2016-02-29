@@ -4,9 +4,194 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mighty_Music.Views"
-        mc:Ignorable="d" d:DesignWith="300" d:DesignHeight="300"
+        mc:Ignorable="d" d:DesignHeight="400"
         Title="MainView" Style="{StaticResource WindowStyle}">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="8,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="0,8"/>
+        </Style>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <Grid>
+                <Image Source="{Binding Url}" Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Grid x:Name="hoverGrid" Opacity="0">
+                    <Border>
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#33000000" Offset="0"/>
+                                <GradientStop Color="#CC000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="{Binding Url}" Width="300" Margin="8,4" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="{Binding Rank, Converter={StaticResource RankToStringConverter}}" FontSize="20" FontWeight="Bold"
+        				HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.05" Storyboard.TargetName="hoverGrid" Storyboard.TargetProperty="Opacity" To="1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="hoverGrid" Storyboard.TargetProperty="Opacity" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <Style x:Key="ListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <Border BorderThickness="3" x:Name="border" Width="250" Height="250" Margin="8">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="25" Direction="60" ShadowDepth="0"/>
+                                </Border.Effect>
+                                <ContentPresenter />
+                            </Border>
+                            <Border x:Name="flag" Visibility="Hidden" Background="#E522A2E5" VerticalAlignment="Top" Margin="8">
+                                <TextBlock Text="Sélectionné" Foreground="White" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="4" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF22A2E5"/>
+                                <Setter TargetName="flag" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="#FF2C2C2C"/>
+            <Setter Property="BorderBrush" Value="DimGray"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource ListBoxItemTemplate}"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItemContainerStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true" CornerRadius="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
+                                    <TextBlock Text="Mot-clé pour la recherche :" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Width="100" SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource TemplatedParent},Mode=OneWayToSource}" SelectionChanged="ComboBox_SelectionChanged">
+                                        <ComboBoxItem Tag="cover" Content="Cover"/>
+                                        <ComboBoxItem Tag="soundcloud" Content="Soundcloud"/>
+                                        <ComboBoxItem Tag="album" Content="Album"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <ScrollViewer Grid.Row="1" Focusable="false" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsGrouping" Value="true"/>
+                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Content fill window-->
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"><Run Text="Nom"/></TextBlock>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox IsReadOnly="True" Text="{Binding CurrentMusicFile.Name}"/>
+                <Button Grid.Column="1" Content="Parcourir" Margin="4,0" Command="{Binding BrowseCommand}"
+					VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <TextBlock Grid.Row="1"><Run Text="Titre"/></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentMusicFile.Title}"/>
+
+            <TextBlock Grid.Row="2"><Run Text="Artiste"/></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentMusicFile.Artist}"/>
+
+            <TextBlock Grid.Row="3"><Run Text="Album"/></TextBlock>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentMusicFile.Album}"/>
+
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8"><Run Text="Pochette"/></TextBlock>
+            <ListBox x:Name="lsb_covers" Grid.Row="4" Grid.Column="1" Margin="0,8" ItemsSource="{Binding Covers, Mode=OneWay}"
+                     SelectedItem="{Binding SelectedCover}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Command="{Binding ApplyCommand}" Content="Appliquer"/>
+        </Grid>
+
+        <!--StatusBar on bottom-->
+        <StatusBar Grid.Row="1" Background="#FF2C2C2C" Foreground="White" BorderThickness="0,1,0,0">
+            <StatusBarItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock><Run Text="{Binding RemainingCount, Mode=OneWay}"/><Run Text=" "/><Run Foreground="#FFCDCDCD" Text="éléments restants."/></TextBlock>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom"
+						Margin="0,0,4,0" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                        <TextBlock><Run Foreground="#FFCDCDCD" Text="Modification de '"/><Run Text=" "/><Run Text="{Binding BusyName, Mode=OneWay}"/><Run Text=" "/><Run Foreground="#FFCDCDCD" Text="'..."/></TextBlock>
+                        <ProgressBar Height="6" Width="200" Foreground="#FF0084C8" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" IsIndeterminate="True" Margin="12,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
