@@ -71,14 +71,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanToNegationConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\RankToStringConverter.cs" />
-    <Compile Include="Extensions\WebExtensions.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\MusicFile.cs" />
     <Compile Include="Utils\Filter.cs" />
     <Compile Include="Utils\SearchEngine.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MusicFileViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

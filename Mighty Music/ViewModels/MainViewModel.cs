@@ -17,8 +17,9 @@ namespace Mighty_Music.ViewModels
     {
         // Fields
         private Queue<string> queueFiles;
-        private MusicFile current;
+        private MusicFileViewModel current;
         private bool isBusy;
+        private bool isSearching;
         private string busyName;
         private List<Cover> covers;
         private Cover selectedCover;
@@ -30,8 +31,7 @@ namespace Mighty_Music.ViewModels
             get { return View; }
             set { View = (MainView)value; }
         }
-
-        public MusicFile CurrentMusicFile
+        public MusicFileViewModel CurrentMusicFile
         {
             get { return current; }
             set
@@ -49,6 +49,15 @@ namespace Mighty_Music.ViewModels
             {
                 isBusy = value;
                 OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+        public bool IsSearching
+        {
+            get { return isSearching; }
+            set
+            {
+                isSearching = value;
+                OnPropertyChanged(nameof(IsSearching));
             }
         }
         public string BusyName
@@ -89,6 +98,13 @@ namespace Mighty_Music.ViewModels
         {
             BrowseCommand = new RelayCommand(Browse);
             ApplyCommand = new RelayCommand(Apply);
+
+            SearchEngine.Initialize();
+            SearchEngine.SearchCompleted += (args) =>
+            {
+                Covers = args;
+                IsSearching = false;
+            };
         }
 
         private void Apply(object obj)
@@ -98,7 +114,7 @@ namespace Mighty_Music.ViewModels
                 BusyName = current.Name;
                 IsBusy = true;
                 current.Cover = selectedCover;
-                current.Save().ContinueWith((t) => { IsBusy = false; });
+                current.Model.Save().ContinueWith((t) => { IsBusy = false; });
             }
                 
             if (queueFiles.Count > 0)
@@ -126,15 +142,19 @@ namespace Mighty_Music.ViewModels
         {
             Covers = null;
             OnPropertyChanged(nameof(RemainingCount));
-            CurrentMusicFile = new MusicFile(path);
-            current.Initialize();
+            var musicFile = new MusicFile(path);
+            musicFile.Initialize();
+            CurrentMusicFile = new MusicFileViewModel(musicFile);
 
             SearchCover();
         }
 
-        public async void SearchCover()
+        public void SearchCover()
         {
-            Covers = await SearchEngine.GetCovers(CurrentMusicFile.ToString(), View.lsb_covers.Tag.ToString());
+            IsSearching = true;
+
+            string query = CurrentMusicFile.ToString() + " " + View.lsb_covers.Tag.ToString();
+            SearchEngine.SearchCovers(query);
         }
     }
 }

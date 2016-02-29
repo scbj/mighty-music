@@ -25,7 +25,7 @@ namespace Mighty_Music.Utils
         private static string[] GetFilters()
         {
             if (!File.Exists(path))
-                throw new FileNotFoundException(path);
+                File.Create(path);
 
             return File.ReadAllLines(path);
         }

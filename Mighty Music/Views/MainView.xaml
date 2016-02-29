@@ -27,9 +27,33 @@
                             </LinearGradientBrush>
                         </Border.Background>
                     </Border>
-                    <TextBlock Text="{Binding Url}" Width="300" Margin="8,4" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
                     <TextBlock Text="{Binding Rank, Converter={StaticResource RankToStringConverter}}" FontSize="20" FontWeight="Bold"
         				HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Margin="8,8" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Url}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Url}" Margin="0,0,8,0"/>
+                        <Button Background="{x:Null}" Foreground="White" Width="15" Height="15" Cursor="Hand" Focusable="False"
+                                Command="{Binding OpenCommand}" CommandParameter="{Binding Url}" Grid.Column="1">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Rectangle Fill="{TemplateBinding Foreground}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill">
+                                                <VisualBrush.Visual>
+                                                    <Canvas Width="76.0106" Height="76.0106" Clip="F1 M 0,0L 76.0106,0L 76.0106,76.0106L 0,76.0106L 0,0">
+                                                        <Path Width="36.5052" Height="38.0053" Canvas.Left="22.0031" Canvas.Top="19.0027" Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 51.0071,19.0027L 51.0071,27.0038L 48.0067,27.0038L 48.0067,22.0031L 25.0035,22.0031L 25.0035,54.0075L 48.0067,54.0075L 48.0067,49.0068L 51.0071,49.0068L 51.0071,57.008L 22.1698,57.008L 22.0031,19.0027L 51.0071,19.0027 Z M 30.0042,35.0049L 45.2563,35.0049L 37.005,28.0039L 47.0066,28.0039L 58.5082,38.0053L 47.0066,48.0067L 37.005,48.0067L 45.2563,41.0057L 30.0042,41.0057L 30.0042,35.0049 Z "/>
+                                                    </Canvas>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
             <DataTemplate.Triggers>
@@ -58,7 +82,7 @@
                         <Grid>
                             <Border BorderThickness="3" x:Name="border" Width="250" Height="250" Margin="8">
                                 <Border.Effect>
-                                    <DropShadowEffect BlurRadius="25" Direction="60" ShadowDepth="0"/>
+                                    <DropShadowEffect BlurRadius="15" Direction="60" ShadowDepth="0" Opacity=".5"/>
                                 </Border.Effect>
                                 <ContentPresenter />
                             </Border>
@@ -96,7 +120,8 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
                                     <TextBlock Text="Mot-clé pour la recherche :" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                                    <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Width="100" SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource TemplatedParent},Mode=OneWayToSource}" SelectionChanged="ComboBox_SelectionChanged">
+                                    <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Width="100" IsEnabled="{Binding IsSearching, Converter={StaticResource BooleanToNegationConverter}}"
+                                              SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource TemplatedParent},Mode=OneWayToSource}" SelectionChanged="ComboBox_SelectionChanged">
                                         <ComboBoxItem Tag="cover" Content="Cover"/>
                                         <ComboBoxItem Tag="soundcloud" Content="Soundcloud"/>
                                         <ComboBoxItem Tag="album" Content="Album"/>
@@ -172,6 +197,12 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+            <Border Grid.Row="4" Grid.Column="1" Background="#4C000000" Margin="0,8" CornerRadius="2" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Recherche en cours..." HorizontalAlignment="Center"/>
+                    <ProgressBar Height="6" Width="300" Foreground="#FF0084C8" Background="{x:Null}" BorderBrush="{x:Null}" IsIndeterminate="True" Margin="0,8,0,0"/>
+                </StackPanel>
+            </Border>
 
             <Button Grid.Row="5" Grid.ColumnSpan="2" Command="{Binding ApplyCommand}" Content="Appliquer"/>
         </Grid>
@@ -184,10 +215,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock><Run Text="{Binding RemainingCount, Mode=OneWay}"/><Run Text=" "/><Run Foreground="#FFCDCDCD" Text="éléments restants."/></TextBlock>
+                    <TextBlock>
+                        <Run Text="{Binding RemainingCount, Mode=OneWay}"/>
+                        <Run Foreground="#FFCDCDCD" Text=" éléments restants."/>
+                    </TextBlock>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom"
 						Margin="0,0,4,0" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                        <TextBlock><Run Foreground="#FFCDCDCD" Text="Modification de '"/><Run Text=" "/><Run Text="{Binding BusyName, Mode=OneWay}"/><Run Text=" "/><Run Foreground="#FFCDCDCD" Text="'..."/></TextBlock>
+                        <TextBlock>
+                            <Run Foreground="#FFCDCDCD" Text="Modification de '"/>
+                            <Run Text="{Binding BusyName, Mode=OneWay}"/>
+                            <Run Foreground="#FFCDCDCD" Text="'..."/></TextBlock>
                         <ProgressBar Height="6" Width="200" Foreground="#FF0084C8" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" IsIndeterminate="True" Margin="12,0,0,0"/>
                     </StackPanel>
                 </Grid>

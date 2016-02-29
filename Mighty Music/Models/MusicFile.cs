@@ -11,60 +11,15 @@ using System.Windows.Media.Imaging;
 
 namespace Mighty_Music.Models
 {
-    public class MusicFile : ViewModelBase
+    public class MusicFile
     {
         private string path;
-        private string name;
-        private string title;
-        private string artist;
-        private string album;
-        private string coverUrl;
 
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-        public string Title
-        {
-            get { return title; }
-            set
-            {
-                title = value;
-                OnPropertyChanged(nameof(Title));
-            }
-        }
-        public string Artist
-        {
-            get { return artist; }
-            set
-            {
-                artist = value;
-                OnPropertyChanged(nameof(Artist));
-            }
-        }
-        public string Album
-        {
-            get { return album; }
-            set
-            {
-                album = value;
-                OnPropertyChanged(nameof(Album));
-            }
-        }
-
-        public Cover Cover
-        {
-            get { return null; }
-            set
-            {
-                coverUrl = value.Url;
-            }
-        }
+        public string Name { get; set; }
+        public string Title { get; set; }
+        public string Artist { get; set; }
+        public string Album { get; set; }
+        public string CoverUrl { get; set; }
 
         public MusicFile(string path)
         {
@@ -75,7 +30,7 @@ namespace Mighty_Music.Models
         {
             Name = Path.GetFileNameWithoutExtension(path);
             var option = StringSplitOptions.RemoveEmptyEntries;
-            var fields = (from s in Filter.Flush(name).Split(new string[] { " - " }, option)
+            var fields = (from s in Filter.Flush(Name).Split(new string[] { " - " }, option)
                           where s.Trim() != ""
                           select s).ToArray();
 
@@ -92,9 +47,9 @@ namespace Mighty_Music.Models
             Task<string> coverPath = GetCoverAsync();
 
             var file = TagLib.File.Create(path);
-            file.Tag.Performers = new string[] { artist };
-            file.Tag.Title = title;
-            file.Tag.Album = album;
+            file.Tag.Performers = new string[] { Artist };
+            file.Tag.Title = Title;
+            file.Tag.Album = Album;
 
             await coverPath;
             var pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
@@ -104,7 +59,7 @@ namespace Mighty_Music.Models
 
         public async Task<string> GetCoverAsync()
         {
-            var bytes = await new WebClient().DownloadDataTaskAsync(coverUrl);
+            var bytes = await new WebClient().DownloadDataTaskAsync(CoverUrl);
 
             var bi = new BitmapImage();
             bi.BeginInit();
@@ -125,7 +80,5 @@ namespace Mighty_Music.Models
 
             return pathToSave;
         }
-
-        public override string ToString() => $"{artist} - {title}";
     }
 }

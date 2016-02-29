@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Styles\Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <converters:BooleanToNegationConverter x:Key="BooleanToNegationConverter"/>
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:RankToStringConverter x:Key="RankToStringConverter"/>
         </ResourceDictionary>
