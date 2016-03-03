@@ -26,6 +26,11 @@ namespace Mighty_Music.Utils
         {
             browser = new WebBrowser();
             browser.DocumentCompleted += DocumentCompleted;
+
+            //browser.Dock = DockStyle.Fill;
+            //var form = new Form();
+            //form.Controls.Add(browser);
+            //form.Show();
         }
 
         public static void SearchCovers(string query)

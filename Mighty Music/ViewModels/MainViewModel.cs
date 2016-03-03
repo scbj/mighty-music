@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Mighty_Music.ViewModels
@@ -16,7 +17,7 @@ namespace Mighty_Music.ViewModels
     public class MainViewModel : ViewModelBase, IViewModel<MainView>
     {
         // Fields
-        private Queue<string> queueFiles;
+        private Queue<string> queueFiles = new Queue<string>();
         private MusicFileViewModel current;
         private bool isBusy;
         private bool isSearching;
@@ -105,19 +106,32 @@ namespace Mighty_Music.ViewModels
                 Covers = args;
                 IsSearching = false;
             };
+
+            NamedPipes.MessageReceived += NamedPipes_MessageReceived;
+            NamedPipes.StartServer();
+        }
+
+        private void NamedPipes_MessageReceived(string path)
+        {
+            queueFiles.Enqueue(path);
+            OnPropertyChanged(nameof(RemainingCount));
+            if (current == null)
+                LoadMusic(queueFiles.Dequeue());
         }
 
         private void Apply(object obj)
         {
             if (current != null && !Keyboard.IsKeyDown(Key.LeftCtrl))
             {
+                if (selectedCover == null)
+                    return;
                 BusyName = current.Name;
                 IsBusy = true;
                 current.Cover = selectedCover;
                 current.Model.Save().ContinueWith((t) => { IsBusy = false; });
             }
                 
-            if (queueFiles.Count > 0)
+            if (queueFiles?.Count > 0)
                 LoadMusic(queueFiles.Dequeue());
             else
                 CurrentMusicFile = null;
@@ -126,6 +140,7 @@ namespace Mighty_Music.ViewModels
         private void Browse(object sender)
         {
             var ofd = new OpenFileDialog();
+            ofd.Title = "Sélectionnez des musiques...";
             ofd.DefaultExt = ".mp3";
             ofd.Filter = "Fichiers MP3 (*.mp3)|*.mp3";
             ofd.Multiselect = true;
@@ -153,8 +168,11 @@ namespace Mighty_Music.ViewModels
         {
             IsSearching = true;
 
-            string query = CurrentMusicFile.ToString() + " " + View.lsb_covers.Tag.ToString();
-            SearchEngine.SearchCovers(query);
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                string query = CurrentMusicFile.ToString() + " " + View.lsb_covers.Tag.ToString();
+                SearchEngine.SearchCovers(query);
+            }));
         }
     }
 }

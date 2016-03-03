@@ -1,4 +1,6 @@
 ﻿
 **/bin
+/bin/Release/
 **/obj
-Mighty Music/obj/Release/App.g.cs
+.vs
+packages
