@@ -55,6 +55,8 @@ namespace Mighty_Music.Models
             var pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
             file.Tag.Pictures = pictures;
             file.Save();
+            
+            //File.Move(path, Path.GetDirectoryName(path) + $"\\{Artist} - {Title}.mp3");
         }
 
         public async Task<string> GetCoverAsync()
