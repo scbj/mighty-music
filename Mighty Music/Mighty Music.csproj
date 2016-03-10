@@ -74,6 +74,8 @@
     <Compile Include="Converters\BooleanToNegationConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\RankToStringConverter.cs" />
+    <Compile Include="Extensions\SystemExtension.cs" />
+    <Compile Include="Extensions\WebBrowserExtension.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\MusicFile.cs" />
     <Compile Include="Utils\Filter.cs" />

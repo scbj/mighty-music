@@ -174,7 +174,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox IsReadOnly="True" Text="{Binding CurrentMusicFile.Name}"/>
+                <TextBox IsReadOnly="True" Text="{Binding CurrentMusicFile.Name, Mode=OneWay}"/>
                 <Button Grid.Column="1" Content="Parcourir" Margin="4,0" Command="{Binding BrowseCommand}"
 					VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </Grid>

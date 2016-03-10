@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mighty_Music.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,12 +33,6 @@ namespace Mighty_Music.Utils
 
         public static void Save(string[] filters) => File.WriteAllLines(path, filters);
 
-        public static string Flush(string original)
-        {
-            foreach (var filter in Filters)
-                original = original.Replace(filter, "");
-
-            return original.Trim();
-        }
+        public static string Flush(string value) => value.Remove(Filters);
     }
 }

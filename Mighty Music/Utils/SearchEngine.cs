@@ -1,4 +1,5 @@
-﻿using Mighty_Music.Models;
+﻿using Mighty_Music.Extensions;
+using Mighty_Music.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace Mighty_Music.Utils
                     var divs = browser.Document.GetElementById("rg_s").Children.ToList().Where(he => he.GetAttribute("className") == "rg_di rg_el ivg-i").ToList();
                     for (int i = 0; i < divs.Count; i++)
                     {
-                        var span = divs[i].GetElementsByTagName("span").ToList().Single(/*s => s.InnerText.Contains('×')*/);
+                        var span = divs[i].GetElementsByTagName("span").ToList().Single(s => s.InnerText.Contains('×'));
                         var sizes = span.InnerText.Split('-')[0].Trim().Split('×');
                         int x = int.Parse(sizes[0].Trim()),
                             y = int.Parse(sizes[1].Trim());
@@ -101,18 +102,6 @@ namespace Mighty_Music.Utils
             {
                 return false;
             }
-        }
-    }
-
-    public static class Extensions
-    {
-        public static List<HtmlElement> ToList(this HtmlElementCollection collection) => collection.Cast<HtmlElement>().ToList();
-
-        public static string DecodeUrl(this string encoded)
-        {
-            return encoded.Replace("%253F", "?")
-                .Replace("%253D", "=")
-                .Replace("%2525", "%");
         }
     }
 }

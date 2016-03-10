@@ -157,9 +157,7 @@ namespace Mighty_Music.ViewModels
         {
             Covers = null;
             OnPropertyChanged(nameof(RemainingCount));
-            var musicFile = new MusicFile(path);
-            musicFile.Initialize();
-            CurrentMusicFile = new MusicFileViewModel(musicFile);
+            CurrentMusicFile = new MusicFileViewModel(new MusicFile(path));
 
             SearchCover();
         }

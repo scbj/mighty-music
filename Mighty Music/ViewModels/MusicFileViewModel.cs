@@ -15,11 +15,6 @@ namespace Mighty_Music.ViewModels
         public string Name
         {
             get { return Model.Name; }
-            set
-            {
-                Model.Name = value;
-                OnPropertyChanged(nameof(Name));
-            }
         }
         public string Title
         {
@@ -63,6 +58,6 @@ namespace Mighty_Music.ViewModels
             Model = model;
         }
 
-        public override string ToString() => $"{Artist} - {Title}";
+        public override string ToString() => Model.ToString();
     }
 }
