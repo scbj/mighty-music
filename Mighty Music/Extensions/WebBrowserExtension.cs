@@ -13,6 +13,7 @@ namespace Mighty_Music.Extensions
 
         public static string DecodeUrl(this string encoded)
         {
+            encoded = System.Web.HttpUtility.UrlDecode(encoded);
             return encoded.Replace("%253F", "?")
                 .Replace("%253D", "=")
                 .Replace("%2525", "%");

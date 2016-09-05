@@ -40,6 +40,7 @@ namespace Mighty_Music.Models
                 file.Tag.Album = Album;
                 await coverPath;
                 file.Tag.Pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
+
                 file.Save();
             }
 
@@ -57,12 +58,6 @@ namespace Mighty_Music.Models
                 Title = fields[1];
                 Album = fields[1];
             }
-
-            // Check if ID3 contains metadata
-            var tag = TagLib.File.Create(fileInfo.FullName).Tag;
-            if (tag.Performers.Length > 0) Artist = tag.Performers[0];
-            if (!String.IsNullOrEmpty(tag.Title)) Title = tag.Title;
-            if (!String.IsNullOrEmpty(tag.Album)) Album = tag.Album;
         }
 
         private async Task<string> DownloadAndSaveCoverAsync()

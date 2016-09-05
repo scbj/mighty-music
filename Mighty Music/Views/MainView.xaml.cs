@@ -41,5 +41,26 @@ namespace Mighty_Music.Views
             if (ViewModel.CurrentMusicFile != null)
                 ViewModel.SearchCover();
         }
+
+        private bool keyDown = false;
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!keyDown && e.Key == Key.LeftCtrl)
+            {
+                keyDown = true;
+                btnApply.Content = "Passer";
+                btnApply.Command = ViewModel.SkipCommand;
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (keyDown && e.Key == Key.LeftCtrl)
+            {
+                keyDown = false;
+                btnApply.Content = "Appliquer";
+                btnApply.Command = ViewModel.ApplyCommand;
+            }
+        }
     }
 }

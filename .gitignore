@@ -4,3 +4,7 @@
 **/obj
 .vs
 packages
+Mighty Music/bin/Release/Mighty Music.exe
+*.suo
+.vs/Mighty Music/v14/.suo
+Mighty Music/bin/Release/filters.ini

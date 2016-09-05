@@ -92,13 +92,15 @@ namespace Mighty_Music.ViewModels
                 OnPropertyChanged(nameof(SelectedCover));
             }
         }
-        public ICommand BrowseCommand { get; set; }
-        public ICommand ApplyCommand { get; set; }
+        public ICommand BrowseCommand { get; }
+        public ICommand ApplyCommand { get; }
+        public ICommand SkipCommand { get; }
 
         public MainViewModel()
         {
             BrowseCommand = new RelayCommand(Browse);
             ApplyCommand = new RelayCommand(Apply);
+            SkipCommand = new RelayCommand((arg) => Continue());
 
             SearchEngine.Initialize();
             SearchEngine.SearchCompleted += (args) =>
@@ -130,7 +132,12 @@ namespace Mighty_Music.ViewModels
                 current.Cover = selectedCover;
                 current.Model.Save().ContinueWith((t) => { IsBusy = false; });
             }
-                
+
+            Continue();
+        }
+
+        private void Continue()
+        {
             if (queueFiles?.Count > 0)
                 LoadMusic(queueFiles.Dequeue());
             else

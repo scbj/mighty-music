@@ -57,8 +57,9 @@ namespace Mighty_Music.Utils
                 }
                 else if (e.Url.AbsoluteUri.Contains(GOOGLE_SEARCH_RESULT))
                 {
+                    await Task.Delay(200);
                     var covers = new List<Cover>();
-
+                    Clipboard.SetText(browser.Document.Body.OuterHtml);
                     var divs = browser.Document.GetElementById("rg_s").Children.ToList().Where(he => he.GetAttribute("className") == "rg_di rg_el ivg-i").ToList();
                     for (int i = 0; i < divs.Count; i++)
                     {
@@ -70,7 +71,7 @@ namespace Mighty_Music.Utils
                         if (x == y && x >= 300)
                         {
                             var href = divs[i].GetElementsByTagName("a").ToList().Single().GetAttribute("href");
-                            covers.Add(new Cover(i + 1, href.Replace("https://www.google.com/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
+                            covers.Add(new Cover(i + 1, href.Replace(/*"https://www.google.com*/"/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
                         }
                         if (covers.Count > 10 || i > 20)
                             break;
