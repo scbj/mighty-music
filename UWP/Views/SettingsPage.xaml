@@ -7,49 +7,56 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:UWP.Converters"
     xmlns:viewModels="using:UWP.ViewModels"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DesignHeight="2000">
     <Page.DataContext>
         <viewModels:SettingsViewModel/>
     </Page.DataContext>
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <Style TargetType="ToggleSwitch">
+            <Setter Property="OnContent" Value="Activé"/>
+            <Setter Property="OffContent" Value="Désactivé"/>
+        </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Paramètres" FontSize="28" Margin="0,16,0,36"/>
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Paramètres" FontSize="28" Margin="0,16,0,36"/>
 
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Musique sur ce PC" FontSize="22" Margin="0,0,0,4"/>
-            <TextBlock Text="Chemin d'accès des musiques non traités" Margin="0,0,0,4"/>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                <TextBlock Text="{Binding SourceFolderPath}" VerticalAlignment="Center"/>
-                <Button Content="Parcourir" Margin="8,0,0,0" Command="{Binding BrowseSourceFolderCommand}"/>
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Musique sur ce PC" FontSize="22" Margin="0,0,0,4"/>
+                <TextBlock Text="Chemin d'accès des musiques non traités" Margin="0,0,0,4"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="{Binding SourceFolderPath}" VerticalAlignment="Center"/>
+                    <Button Content="Parcourir" Margin="8,0,0,0" Command="{Binding BrowseSourceFolderCommand}"/>
+                </StackPanel>
+
+                <TextBlock Text="Organisation" FontSize="22" Margin="0,0,0,4"/>
+                <ToggleSwitch x:Name="moveTreatedMusic" Header="Déplacer les musiques dans un autre emplacement une fois traitées" Margin="0,0,0,4" IsOn="{Binding IsMoveFileEnable, Mode=TwoWay}" Toggled="moveTreatedMusic_Toggled"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Visibility="{Binding IsOn, ElementName=moveTreatedMusic, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="{Binding DestinationFolderPath}" VerticalAlignment="Center"/>
+                    <Button Content="Parcourir" Margin="8,0,0,0" Command="{Binding BrowseDestFolderCommand}"/>
+                </StackPanel>
+
+                <TextBlock Text="Filtres" FontSize="22" Margin="0,0,0,4"/>
+                <TextBlock Text="Ajouter les chaînes de caractères devant être ignoré lors de l'extraction des métadonnées" Margin="0,0,0,4"/>
+
+                <ListView x:Name="filters" Height="200" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{ThemeResource AppBarBorderThemeBrush}" BorderThickness="1" ItemsSource="{Binding Filters}"/>
+                <CommandBar Width="600" HorizontalAlignment="Left" Margin="0,0,0,8">
+                    <AppBarButton Icon="Add" Label="Ajouter" Command="{Binding AddFilterCommand}"/>
+                    <AppBarButton Icon="Delete" Label="Supprimer" Command="{Binding RemoveFilterCommand}" CommandParameter="{Binding SelectedItem, ElementName=filters}"/>
+                </CommandBar>
+
+                <TextBlock Text="Avancées" FontSize="22" Margin="0,0,0,4"/>
+                <ToggleSwitch Header="Sauvegarder la date de création du media dans la métadonnée Descpription" Margin="0,0,0,4" IsOn="{Binding IsSaveCreationTimeEnable, Mode=TwoWay}"/>
+                <ToggleSwitch Header="Traiter les musiques de la plus ancienne à la plus récente (alphabétique par défaut)" Margin="0,0,0,4" IsOn="{Binding IsDateTreatingEnable, Mode=TwoWay}"/>
             </StackPanel>
-
-            <TextBlock Text="Organisation" FontSize="22" Margin="0,0,0,4"/>
-            <ToggleSwitch x:Name="moveTreatedMusic" Header="Déplacer les musiques dans un autre emplacement une fois traitées" OnContent="Activé" OffContent="Désactivé" Margin="0,0,0,4" IsOn="{Binding IsMoveFileEnable, Mode=TwoWay}" Toggled="moveTreatedMusic_Toggled"/>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Visibility="{Binding IsOn, ElementName=moveTreatedMusic, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <TextBlock Text="{Binding DestFolderPath}" VerticalAlignment="Center"/>
-                <Button Content="Parcourir" Margin="8,0,0,0" Command="{Binding BrowseDestFolderCommand}"/>
-            </StackPanel>
-
-            <TextBlock Text="Filtres" FontSize="22" Margin="0,0,0,4"/>
-            <TextBlock Text="Ajouter les chaînes de caractères devant être ignoré lors de l'extraction des métadonnées" Margin="0,0,0,4"/>
-            
-            <ListView Height="200" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{ThemeResource AppBarBorderThemeBrush}" BorderThickness="1">
-            </ListView>
-            <CommandBar Width="600" HorizontalAlignment="Left">
-                <AppBarButton Icon="Add" Label="Ajouter"/>
-                <AppBarButton Icon="Delete" Label="Supprimer"/>
-                <CommandBar.SecondaryCommands>
-                    <AppBarButton Label="Réinitialiser les filtres par défaut"/>
-                </CommandBar.SecondaryCommands>
-            </CommandBar>
-            
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

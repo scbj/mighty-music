@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UWP.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,22 +28,36 @@ namespace UWP
         public MainPage()
         {
             this.InitializeComponent();
+
+            RootFrame.Navigate(typeof(DragAndDropPage));
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            RootFrame.Navigated += RootFrame_Navigated;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            rootFrame.Navigate(typeof(DragAndDropPage));            
+            var systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.AppViewBackButtonVisibility = RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void SplitViewHamburgerButton_Click(object sender, RoutedEventArgs e)
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            splitView.IsPaneOpen = !splitView.IsPaneOpen;
+            if (RootFrame.CanGoBack)
+            {
+                RootFrame.GoBack();
+                e.Handled = true;
+            }
         }
 
-        private void SplitViewRadioButton_Click(object sender, RoutedEventArgs e)
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            RootSplitView.IsPaneOpen = !RootSplitView.IsPaneOpen;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var button = sender as RadioButton;
-            if (button != null)
+            if (button != null && button.IsChecked.HasValue && button.IsChecked.Value)
             {
                 Type pageType = null;
                 switch (button.Content.ToString())
@@ -60,8 +75,8 @@ namespace UWP
                         pageType = typeof(SettingsPage);
                         break;
                 }
-                if (pageType != null && rootFrame.CurrentSourcePageType != pageType)
-                    rootFrame.Navigate(pageType);
+                if (pageType != null && RootFrame.CurrentSourcePageType != pageType)
+                    RootFrame.Navigate(pageType);
             }
         }
     }

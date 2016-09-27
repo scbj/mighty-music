@@ -5,9 +5,22 @@
     xmlns:local="using:UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:UWP.Converters"
+    xmlns:viewModels="using:UWP.ViewModels"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <viewModels:DragAndDropViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Glisser-déposer vos musiques ici" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" AllowDrop="True" DragOver="Grid_DragOver">
+        <TextBlock Text="Glisser-déposer vos musiques ici" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding !IsLoadingContent, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoadingContent, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressRing Width="40" Height="40" IsActive="True"/>
+            <TextBlock Text="Chargement des vos élements..." VerticalAlignment="Center" Margin="8,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>

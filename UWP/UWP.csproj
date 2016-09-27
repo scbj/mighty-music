@@ -95,10 +95,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Controls\InputContentDialog.xaml.cs">
+      <DependentUpon>InputContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\SearchEngine.cs" />
+    <Compile Include="ViewModels\DragAndDropViewModel.cs" />
     <Compile Include="Views\DragAndDropPage.xaml.cs">
       <DependentUpon>DragAndDropPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\InputContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

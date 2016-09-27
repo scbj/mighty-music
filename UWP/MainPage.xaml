@@ -5,20 +5,20 @@
     xmlns:local="using:UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="Page_Loaded">
+    mc:Ignorable="d" NavigationCacheMode="Required">
     <Page.Resources>
-        <SolidColorBrush x:Key="RadioButtonPressedBackgroundBrush" Color="Black" Opacity="0.3" />
-        <SolidColorBrush x:Key="RadioButtonCheckedBackgroundBrush" Color="Black" Opacity="0.2" />
-        <SolidColorBrush x:Key="RadioButtonHoverBackgroundBrush" Color="Black" Opacity="0.1" />
+        <SolidColorBrush x:Key="MenuNavigationPressedBackgroundBrush" Color="Black" Opacity="0.3"/>
+        <SolidColorBrush x:Key="MenuNavigationSelectedBackgroundBrush" Color="Black" Opacity="0.2"/>
+        <SolidColorBrush x:Key="MenuNavigationHoverBackgroundBrush" Color="Black" Opacity="0.1"/>
 
         <Style x:Key="SplitViewRadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="0,12"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -29,14 +29,14 @@
                                     <VisualState x:Name="PointerOver">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButtonHoverBackgroundBrush}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MenuNavigationHoverBackgroundBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButtonPressedBackgroundBrush}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MenuNavigationPressedBackgroundBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -45,7 +45,7 @@
                                     <VisualState x:Name="Checked">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButtonCheckedBackgroundBrush}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MenuNavigationSelectedBackgroundBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -58,13 +58,13 @@
                                     <VisualState x:Name="PointerFocused"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Grid x:Name="BackgroundGrid" Background="Transparent" VerticalAlignment="Stretch">
+                            <Grid x:Name="BackgroundGrid" Background="{TemplateBinding Background}" VerticalAlignment="Stretch" Height="48">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="48"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="20"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock FontSize="20" Text="{TemplateBinding Tag}" FontFamily="Segoe MDL2 Assets" Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" Text="{TemplateBinding Tag}" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 <ContentPresenter AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
                         </Border>
@@ -72,24 +72,76 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="MenuNavigationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="Padding" Value="0,12" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MenuNavigationHoverBackgroundBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MenuNavigationPressedBackgroundBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" Height="48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="20" Text="{TemplateBinding Tag}" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <ContentPresenter Grid.Column="1" x:Name="ContentPresenter" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Page.Resources>
 
-    <SplitView x:Name="splitView" IsPaneOpen="True" DisplayMode="CompactInline">
+    <SplitView x:Name="RootSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
             <RelativePanel>
-                <ScrollViewer RelativePanel.Above="FooterPanel" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Button x:Name="HamburgerButton" Style="{StaticResource MenuNavigationButtonStyle}" Tag="&#xE700;" Click="HamburgerButton_Click"/>
+                <ScrollViewer x:Name="MenuScrollViewer" RelativePanel.Below="HamburgerButton" RelativePanel.Above="FooterPanel" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <RadioButton Click="SplitViewHamburgerButton_Click" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE700;" GroupName="Hamburger"/>
-                        <RadioButton Click="SplitViewRadioButton_Click" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8A5;" GroupName="Navigation" Content="Glisser-déposer" IsChecked="True"/>
-                        <RadioButton Click="SplitViewRadioButton_Click" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8FD;" GroupName="Navigation" Content="Non traitée(s)"/>
-                        <RadioButton Click="SplitViewRadioButton_Click" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8D6;" GroupName="Navigation" Content="Toutes les musiques"/>
+                        <RadioButton Checked="RadioButton_Checked" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8A5;" GroupName="Navigation" Content="Glisser-déposer"/>
+                        <RadioButton Checked="RadioButton_Checked" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8FD;" GroupName="Navigation" Content="Non traitée(s)"/>
+                        <RadioButton Checked="RadioButton_Checked" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE8D6;" GroupName="Navigation" Content="Toutes les musiques"/>
                     </StackPanel>
                 </ScrollViewer>
                 <StackPanel x:Name="FooterPanel" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
-                    <RadioButton Click="SplitViewRadioButton_Click" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE713;" GroupName="Navigation" Content="Paramètres"/>
+                    <RadioButton Checked="RadioButton_Checked" Style="{StaticResource SplitViewRadioButtonStyle}" Tag="&#xE713;" GroupName="Navigation" Content="Paramètres"/>
                 </StackPanel>
             </RelativePanel>
         </SplitView.Pane>
-        <Frame x:Name="rootFrame"/>
+        <Frame x:Name="RootFrame"/>
     </SplitView>
 </Page>

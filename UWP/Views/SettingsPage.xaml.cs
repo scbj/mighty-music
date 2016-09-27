@@ -34,15 +34,22 @@ namespace UWP.Views
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+
+        }
+
         private async void moveTreatedMusic_Toggled(object sender, RoutedEventArgs e)
         {
             SettingsViewModel settingsViewModel = (SettingsViewModel)DataContext;
 
-            if (moveTreatedMusic.IsOn && settingsViewModel.DestFolderPath == null)
+            if (moveTreatedMusic.IsOn && settingsViewModel.DestinationFolderPath == null)
             {
                 StorageFolder storageFolder = await settingsViewModel.PickFolder();
                 if (storageFolder != null)
-                    settingsViewModel.DestFolderPath = storageFolder.Path;
+                    settingsViewModel.DestinationFolderPath = storageFolder.Path;
                 else
                     moveTreatedMusic.IsOn = false;
 

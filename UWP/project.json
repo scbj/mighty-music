@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
+    "Google.Apis.Customsearch.v1": "1.16.0.466",
+    "Microsoft.Bcl.Async": "1.0.168",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
   },
   "frameworks": {
     "uap10.0": {}
