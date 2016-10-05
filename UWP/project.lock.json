@@ -3,73 +3,6 @@
   "version": 2,
   "targets": {
     "UAP,Version=v10.0": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -379,15 +312,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.native.System.IO.Compression/4.1.0": {
@@ -2248,73 +2172,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -2572,15 +2429,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -4601,73 +4449,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -4926,15 +4707,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -6993,73 +6765,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -7320,15 +7025,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -9355,73 +9051,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -9683,15 +9312,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -11756,73 +11376,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -12083,15 +11636,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -14118,73 +13662,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Google.Apis/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.16.0",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.IO.Compression": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.Encoding": "4.0.11",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Google.Apis.PlatformServices.dll": {},
-          "lib/win81/Google.Apis.dll": {}
-        }
-      },
-      "Google.Apis.Core/1.16.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Primitives": "4.0.11",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Core.dll": {}
-        }
-      },
-      "Google.Apis.Customsearch.v1/1.16.0.466": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.16.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll": {}
-        }
-      },
       "Microsoft.Bcl/1.1.8": {
         "type": "package",
         "dependencies": {
@@ -14446,15 +13923,6 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/9.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -16520,80 +15988,6 @@
     }
   },
   "libraries": {
-    "Google.Apis/1.16.0": {
-      "sha512": "/p657K7J7p9aRl6QxUjQfNK0AobxnLHwDWdSqAr/17lZeQR+XMuEbIy7No80+zDeS39kKrRVWFlu1vHiws7gRQ==",
-      "type": "package",
-      "files": [
-        "Google.Apis.1.16.0.nupkg.sha512",
-        "Google.Apis.nuspec",
-        "License.txt",
-        "lib/net45/Google.Apis.PlatformServices.dll",
-        "lib/net45/Google.Apis.PlatformServices.pdb",
-        "lib/net45/Google.Apis.PlatformServices.xml",
-        "lib/net45/Google.Apis.dll",
-        "lib/net45/Google.Apis.pdb",
-        "lib/net45/Google.Apis.xml",
-        "lib/netstandard1.3/Google.Apis.dll",
-        "lib/netstandard1.3/Google.Apis.pdb",
-        "lib/netstandard1.3/Google.Apis.xml",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.dll",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.pdb",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.xml",
-        "lib/win81/Google.Apis.PlatformServices.dll",
-        "lib/win81/Google.Apis.PlatformServices.pdb",
-        "lib/win81/Google.Apis.PlatformServices.xml",
-        "lib/win81/Google.Apis.dll",
-        "lib/win81/Google.Apis.pdb",
-        "lib/win81/Google.Apis.xml",
-        "lib/wp8/Google.Apis.PlatformServices.dll",
-        "lib/wp8/Google.Apis.PlatformServices.pdb",
-        "lib/wp8/Google.Apis.PlatformServices.xml",
-        "lib/wp8/Google.Apis.dll",
-        "lib/wp8/Google.Apis.pdb",
-        "lib/wp8/Google.Apis.xml",
-        "lib/wpa81/Google.Apis.PlatformServices.dll",
-        "lib/wpa81/Google.Apis.PlatformServices.pdb",
-        "lib/wpa81/Google.Apis.PlatformServices.xml",
-        "lib/wpa81/Google.Apis.dll",
-        "lib/wpa81/Google.Apis.pdb",
-        "lib/wpa81/Google.Apis.xml"
-      ]
-    },
-    "Google.Apis.Core/1.16.0": {
-      "sha512": "uATqVAsPHlpOf+3VV51xFEIghAMSLJyh1hqoVpnPOlkXBx7fkOcs0qP3tKXtmsaeuyC/7BYM1Tt42lyIyhY2lQ==",
-      "type": "package",
-      "files": [
-        "Google.Apis.Core.1.16.0.nupkg.sha512",
-        "Google.Apis.Core.nuspec",
-        "License.txt",
-        "lib/net45/Google.Apis.Core.dll",
-        "lib/net45/Google.Apis.Core.pdb",
-        "lib/net45/Google.Apis.Core.xml",
-        "lib/netstandard1.3/Google.Apis.Core.dll",
-        "lib/netstandard1.3/Google.Apis.Core.pdb",
-        "lib/netstandard1.3/Google.Apis.Core.xml",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.Core.dll",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.Core.pdb",
-        "lib/portable-net45+sl50+netcore45+wpa81+wp8/Google.Apis.Core.xml"
-      ]
-    },
-    "Google.Apis.Customsearch.v1/1.16.0.466": {
-      "sha512": "uZ5VP/xKgTZCMJXgEfwHYEIR/7FsbtvL+bncm08a07RhWLFZTdRpCAkNL4b5wADHkblpkBe1VWKv43W77I4tJw==",
-      "type": "package",
-      "files": [
-        "Google.Apis.Customsearch.v1.1.16.0.466.nupkg.sha512",
-        "Google.Apis.Customsearch.v1.nuspec",
-        "lib/netstandard1.3/Google.Apis.Customsearch.v1.dll",
-        "lib/netstandard1.3/Google.Apis.Customsearch.v1.pdb",
-        "lib/netstandard1.3/Google.Apis.Customsearch.v1.xml",
-        "lib/portable-net40+sl50+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.dll",
-        "lib/portable-net40+sl50+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.pdb",
-        "lib/portable-net40+sl50+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.xml",
-        "lib/portable-net45+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.dll",
-        "lib/portable-net45+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.pdb",
-        "lib/portable-net45+netcore45+wpa81+wp8/Google.Apis.Customsearch.v1.xml"
-      ]
-    },
     "Microsoft.Bcl/1.1.8": {
       "sha512": "gM+PUzd8ONxJpcPJeNppCJPklDhDuPUMVQkxvK4fe0rd9WyqBNPh4+UFx3Uv8zuG4C1Gapu1c25sfotE7TQtig==",
       "type": "package",
@@ -17051,29 +16445,6 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
-      ]
-    },
-    "Newtonsoft.Json/9.0.1": {
-      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
-      "type": "package",
-      "files": [
-        "Newtonsoft.Json.9.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "tools/install.ps1"
       ]
     },
     "runtime.any.System.Collections/4.0.11": {
@@ -22792,7 +22163,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Google.Apis.Customsearch.v1 >= 1.16.0.466",
       "Microsoft.Bcl.Async >= 1.0.168",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2"
     ],

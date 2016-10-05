@@ -15,7 +15,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" AllowDrop="True" DragOver="Grid_DragOver">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop">
         <TextBlock Text="Glisser-déposer vos musiques ici" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding !IsLoadingContent, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoadingContent, Converter={StaticResource BooleanToVisibilityConverter}}">
