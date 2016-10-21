@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Utils\SearchEngine.cs" />
     <Compile Include="ViewModels\DragAndDropViewModel.cs" />
+    <Compile Include="ViewModels\UntreatedViewModel.cs" />
     <Compile Include="Views\DragAndDropPage.xaml.cs">
       <DependentUpon>DragAndDropPage.xaml</DependentUpon>
     </Compile>

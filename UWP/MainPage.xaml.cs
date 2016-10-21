@@ -30,8 +30,6 @@ namespace UWP
         {
             this.InitializeComponent();
 
-            SearchEngine.Initialize();
-
             RootFrame.Navigate(typeof(DragAndDropPage));
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
             RootFrame.Navigated += RootFrame_Navigated;

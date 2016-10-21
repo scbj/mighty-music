@@ -37,12 +37,7 @@ namespace UWP.Views
 
         private void Grid_Drop(object sender, DragEventArgs e)
         {
-            SearchEngine.SearchCompleted += (imageUrls) =>
-            {
-                foreach (string url in imageUrls)
-                    Debug.WriteLine(url);
-            };
-            SearchEngine.SearchImages("Talos - Your Love Is An Island cover");
+
         }
     }
 }

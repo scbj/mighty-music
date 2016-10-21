@@ -60,7 +60,7 @@ namespace Mighty_Music.Utils
                     await Task.Delay(200);
                     var covers = new List<Cover>();
                     Clipboard.SetText(browser.Document.Body.OuterHtml);
-                    var divs = browser.Document.GetElementById("rg_s").Children.ToList().Where(he => he.GetAttribute("className") == "rg_di rg_el ivg-i").ToList();
+                    var divs = browser.Document.GetElementById("rg_s").Children.ToList().Where(he => he.GetAttribute("className") == "rg_di rg_bx rg_el ivg-i").ToList();
                     for (int i = 0; i < divs.Count; i++)
                     {
                         var span = divs[i].GetElementsByTagName("span").ToList().Single(s => s.InnerText.Contains('×'));
