@@ -1,4 +1,6 @@
-﻿using MVVM.Pattern__UWP_.ViewModel;
+﻿using SBToolkit.Uwp.UI.Input;
+using SBToolkit.Uwp.UI.Observable;
+using SBToolkit.Uwp.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +18,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace UWP.ViewModels
 {
-    public class SettingsViewModel : ObservableObject
+    public class SettingsViewModel : ObservableObject, IViewModel
     {
         #region Properties
         public string SourceFolderPath
@@ -76,10 +78,8 @@ namespace UWP.ViewModels
 
         public SettingsViewModel()
         {
-            ApplicationSettings.Initialize();
-
             // UI Commands
-            BrowseSourceFolderCommand = new RelayCommand((s) =>
+            BrowseSourceFolderCommand = new RelayCommand(() =>
             {
                 PickFolder().ContinueWith(async (t) =>
                 {
@@ -90,7 +90,7 @@ namespace UWP.ViewModels
                     });
                 });
             });
-            BrowseDestFolderCommand = new RelayCommand((s) =>
+            BrowseDestFolderCommand = new RelayCommand(() =>
             {
                 PickFolder().ContinueWith(async (t) =>
                 {
@@ -102,10 +102,10 @@ namespace UWP.ViewModels
                 });
             });
             AddFilterCommand = new RelayCommand(AddFilter);
-            RemoveFilterCommand = new RelayCommand(RemoveFilter, (param) => param != null);
+            RemoveFilterCommand = new RelayCommand<string>(RemoveFilter, (param) => param != null);
         }
 
-        private async void AddFilter(object param)
+        private async void AddFilter()
         {
             var inputContentDialog = new InputContentDialog("NOUVEAU FILTRE")
             {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UWP.Utils;
 using UWP.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -29,8 +28,6 @@ namespace UWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            SearchEngine.Initialize();
 
             RootFrame.Navigate(typeof(DragAndDropPage));
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;

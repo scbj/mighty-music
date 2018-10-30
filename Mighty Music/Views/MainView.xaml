@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mighty_Music.Views"
         mc:Ignorable="d" d:DesignHeight="400"
-        Title="MainView" Style="{StaticResource WindowStyle}" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+        Title="{Binding WindowTitle}" Style="{StaticResource WindowStyle}" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="VerticalAlignment" Value="Center"/>

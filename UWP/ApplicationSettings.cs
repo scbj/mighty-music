@@ -28,8 +28,8 @@ namespace UWP
             get { return (string)localSettings.Values[nameof(DestinationFolderPath)]; }
             set { localSettings.Values[nameof(DestinationFolderPath)] = value; }
         }
-        public static bool IsMoveFileEnable { get { return DestinationFolderPath != null; } }
-        public static ObservableCollection<string> Filters { get { return filters; } }
+        public static bool IsMoveFileEnable => DestinationFolderPath != null;
+        public static ObservableCollection<string> Filters => filters;
         public static bool IsSaveCreationTimeEnable
         {
             get

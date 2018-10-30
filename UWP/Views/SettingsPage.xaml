@@ -38,7 +38,7 @@
                 </StackPanel>
 
                 <TextBlock Text="Organisation" FontSize="22" Margin="0,0,0,4"/>
-                <ToggleSwitch x:Name="moveTreatedMusic" Header="Déplacer les musiques dans un autre emplacement une fois traitées" Margin="0,0,0,4" IsOn="{Binding IsMoveFileEnable, Mode=TwoWay}" Toggled="moveTreatedMusic_Toggled"/>
+                <ToggleSwitch x:Name="moveTreatedMusic" Header="Déplacer les musiques dans un autre emplacement une fois traitées" Margin="0,0,0,4" IsOn="{Binding IsMoveFileEnable, Mode=TwoWay}" Toggled="MoveTreatedMusic_Toggled"/>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Visibility="{Binding IsOn, ElementName=moveTreatedMusic, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="{Binding DestinationFolderPath}" VerticalAlignment="Center"/>
                     <Button Content="Parcourir" Margin="8,0,0,0" Command="{Binding BrowseDestFolderCommand}"/>
@@ -50,7 +50,7 @@
                 <ListView x:Name="filters" Height="200" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{ThemeResource AppBarBorderThemeBrush}" BorderThickness="1" ItemsSource="{Binding Filters}"/>
                 <CommandBar Width="600" HorizontalAlignment="Left" Margin="0,0,0,8">
                     <AppBarButton Icon="Add" Label="Ajouter" Command="{Binding AddFilterCommand}"/>
-                    <AppBarButton Icon="Delete" Label="Supprimer" Command="{Binding RemoveFilterCommand}" CommandParameter="{Binding SelectedItem, ElementName=filters}"/>
+                    <AppBarButton Icon="Delete" Label="Supprimer" Command="{x:Bind ViewModel.RemoveFilterCommand, Mode=OneWay}" CommandParameter="{x:Bind filters.SelectedItem, Mode=OneWay}"/>
                 </CommandBar>
 
                 <TextBlock Text="Avancées" FontSize="22" Margin="0,0,0,4"/>

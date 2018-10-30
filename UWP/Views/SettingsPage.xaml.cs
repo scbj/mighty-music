@@ -1,4 +1,4 @@
-﻿using MVVM.Pattern__UWP_.ViewModel;
+﻿using SBToolkit.Uwp.UI.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,12 +27,14 @@ namespace UWP.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsPage : Page
+    public sealed partial class SettingsPage : Page, IView<SettingsViewModel>
     {
         public SettingsPage()
         {
             this.InitializeComponent();
         }
+
+        public SettingsViewModel ViewModel => base.DataContext as SettingsViewModel;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -41,7 +43,7 @@ namespace UWP.Views
 
         }
 
-        private async void moveTreatedMusic_Toggled(object sender, RoutedEventArgs e)
+        private async void MoveTreatedMusic_Toggled(object sender, RoutedEventArgs e)
         {
             SettingsViewModel settingsViewModel = (SettingsViewModel)DataContext;
 

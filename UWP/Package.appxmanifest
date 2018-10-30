@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="cae4c57c-8a1a-4cab-b155-48d3d3751cb3" Publisher="CN=sacha" Version="0.1.0.0" />
+  <Identity Name="cae4c57c-8a1a-4cab-b155-48d3d3751cb3" Publisher="CN=sacha" Version="0.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="cae4c57c-8a1a-4cab-b155-48d3d3751cb3" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Mighty Music</DisplayName>
@@ -20,6 +20,15 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileOpenPicker">
+          <uap:FileOpenPicker>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.mp3</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileOpenPicker>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

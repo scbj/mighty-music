@@ -126,9 +126,9 @@
         
     </Page.Resources>
 
-    <SplitView x:Name="RootSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
+    <SplitView x:Name="RootSplitView" IsPaneOpen="True" DisplayMode="CompactInline" Background="{ThemeResource ApplicationBackgroundMediumBrush}">
         <SplitView.Pane>
-            <RelativePanel>
+            <RelativePanel Background="{ThemeResource ApplicationBackgroundLowBrush}">
                 <Button x:Name="HamburgerButton" Style="{StaticResource MenuNavigationButtonStyle}" Tag="&#xE700;" Click="HamburgerButton_Click"/>
                 <ScrollViewer x:Name="MenuScrollViewer" RelativePanel.Below="HamburgerButton" RelativePanel.Above="FooterPanel" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <StackPanel>

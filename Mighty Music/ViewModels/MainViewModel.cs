@@ -5,10 +5,7 @@ using Mighty_Music.Views;
 using MVVM.Pattern.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,6 +40,7 @@ namespace Mighty_Music.ViewModels
                 OnPropertyChanged(nameof(CurrentMusicFile));
             }
         }
+        public string WindowTitle => $"Mighty Music - {Assembly.GetExecutingAssembly().GetName().Version}";
         public bool IsBusy
         {
             get { return isBusy; }
@@ -125,11 +123,12 @@ namespace Mighty_Music.ViewModels
         {
             if (current != null && !Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                if (selectedCover == null)
-                    return;
                 BusyName = current.Name;
                 IsBusy = true;
-                current.Cover = selectedCover;
+
+                if (SelectedCover != null)
+                    current.Cover = selectedCover;
+
                 current.Model.Save().ContinueWith((t) => { IsBusy = false; });
             }
 

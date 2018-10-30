@@ -57,23 +57,23 @@ namespace Mighty_Music.Utils
                 }
                 else if (e.Url.AbsoluteUri.Contains(GOOGLE_SEARCH_RESULT))
                 {
-                    await Task.Delay(200);
+                    await Task.Delay(500);
                     var covers = new List<Cover>();
-                    Clipboard.SetText(browser.Document.Body.OuterHtml);
-                    var divs = browser.Document.GetElementById("rg_s").Children.ToList().Where(he => he.GetAttribute("className") == "rg_di rg_el ivg-i").ToList();
+
+                    var divs = browser.Document.All.ToList().Where(div => div.GetAttribute("className") == "rg_bx rg_di rg_el ivg-i").ToList();
                     for (int i = 0; i < divs.Count; i++)
                     {
-                        var span = divs[i].GetElementsByTagName("span").ToList().Single(s => s.InnerText.Contains('×'));
-                        var sizes = span.InnerText.Split('-')[0].Trim().Split('×');
-                        int x = int.Parse(sizes[0].Trim()),
-                            y = int.Parse(sizes[1].Trim());
+                        HtmlElement div = divs[i].All.ToList().Single(d => d.GetAttribute("className") == "rg_ilmbg" && d.InnerText.Contains('×'));
+                        string[] sizes = div.InnerText.Split('-')[0].Trim().Split('×');
+                        int x = Int32.Parse(sizes[0].Trim()),
+                            y = Int32.Parse(sizes[1].Trim());
 
-                        if (x == y && x >= 300)
+                        if (x == y && x >= 500)
                         {
-                            var href = divs[i].GetElementsByTagName("a").ToList().Single().GetAttribute("href");
+                           string href = divs[i].GetElementsByTagName("a").ToList().First().GetAttribute("href");
                             covers.Add(new Cover(i + 1, href.Replace(/*"https://www.google.com*/"/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
                         }
-                        if (covers.Count > 10 || i > 20)
+                        if (covers.Count > 10 || (i > 20 && covers.Count >= 5))
                             break;
                     }
 

@@ -39,7 +39,9 @@ namespace Mighty_Music.Models
                 file.Tag.Title = Title;
                 file.Tag.Album = Album;
                 await coverPath;
-                file.Tag.Pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
+
+                if (coverPath.Result != null)
+                    file.Tag.Pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
 
                 file.Save();
             }
@@ -62,6 +64,9 @@ namespace Mighty_Music.Models
 
         private async Task<string> DownloadAndSaveCoverAsync()
         {
+            if (String.IsNullOrWhiteSpace(CoverUrl))
+                return null;
+
             byte[] bytes = await new WebClient().DownloadDataTaskAsync(CoverUrl);
 
             var bi = new BitmapImage();

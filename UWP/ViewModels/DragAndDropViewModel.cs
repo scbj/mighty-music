@@ -1,4 +1,4 @@
-﻿using MVVM.Pattern__UWP_.ViewModel;
+﻿using SBToolkit.Uwp.UI.Observable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,12 @@ namespace UWP.ViewModels
 {
     public class DragAndDropViewModel : ObservableObject
     {
-        bool isLoadingContent;
+        bool _isLoadingContent;
 
         public bool IsLoadingContent
         {
-            get { return isLoadingContent; }
-            set
-            {
-                isLoadingContent = value;
-                OnPropertyChanged(nameof(IsLoadingContent));
-            }
+            get => _isLoadingContent;
+            set => Set(ref _isLoadingContent, value);
         }
     }
 }
