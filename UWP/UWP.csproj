@@ -114,7 +114,10 @@
     <Compile Include="Models\Music.cs" />
     <Compile Include="Extensions\TagsEtensions.cs" />
     <Compile Include="ViewModels\DragAndDropViewModel.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModels\MusicViewModel.cs" />
+=======
+>>>>>>> 499185accde5e5d98ad1ae27e7c47130ee73f614
     <Compile Include="ViewModels\UntreatedViewModel.cs" />
     <Compile Include="Views\DragAndDropPage.xaml.cs">
       <DependentUpon>DragAndDropPage.xaml</DependentUpon>
