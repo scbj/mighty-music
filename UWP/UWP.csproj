@@ -114,10 +114,7 @@
     <Compile Include="Models\Music.cs" />
     <Compile Include="Extensions\TagsEtensions.cs" />
     <Compile Include="ViewModels\DragAndDropViewModel.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModels\MusicViewModel.cs" />
-=======
->>>>>>> 499185accde5e5d98ad1ae27e7c47130ee73f614
     <Compile Include="ViewModels\UntreatedViewModel.cs" />
     <Compile Include="Views\DragAndDropPage.xaml.cs">
       <DependentUpon>DragAndDropPage.xaml</DependentUpon>
@@ -195,7 +192,7 @@
   <ItemGroup>
     <Reference Include="SBToolkit.Uwp.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Sacha\OneDrive\Code\Visual Studio Projects\SBToolkit\SBToolkit.Uwp.UI\bin\Debug\SBToolkit.Uwp.UI.dll</HintPath>
+      <HintPath>..\..\SBToolkit\SBToolkit.Uwp.UI\bin\Release\SBToolkit.Uwp.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

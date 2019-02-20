@@ -47,37 +47,75 @@ namespace Mighty_Music.Utils
 
         private async static void DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            void WriteQuery()
+            {
+                // Get the search input
+                HtmlElement input = browser.Document
+                    .GetElementsByTagName("input")
+                    .ToList()
+                    .Single(el => el.GetAttribute("className") == "gLFyf gsfi");
+
+                // Fill it with the query
+                input.InnerText = query;
+            }
+
+            void ClickSearchButton()
+            {
+                // Get the search button
+                HtmlElement button = browser.Document
+                    .GetElementsByTagName("button")
+                    .ToList()
+                    .Single(el => el.GetAttribute("className") == "Tg7LZd");
+
+                // Simulate a click event on the button
+                button.InvokeMember("click");
+            }
+
+            void ListCover ()
+            {
+                var covers = new List<Cover>();
+                var divs = browser.Document.All.ToList().Where(div => div.GetAttribute("className") == "rg_bx rg_di rg_el ivg-i").ToList();
+                for (int i = 0; i < divs.Count; i++)
+                {
+                    HtmlElement div = divs[i].All.ToList().Single(d => d.GetAttribute("className") == "rg_ilmbg" && d.InnerText.Contains('×'));
+                    string[] sizes = div.InnerText.Split('-')[0].Trim().Split('×');
+                    int x = Int32.Parse(sizes[0].Trim()),
+                        y = Int32.Parse(sizes[1].Trim());
+
+                    if (x == y && x >= 500)
+                    {
+                        string href = divs[i]
+                            .GetElementsByTagName("a")
+                            .ToList()
+                            .Single(el => !el.GetAttribute("href").StartsWith("https://www.google.com/search?tbm"))
+                            .GetAttribute("href");
+
+                        covers.Add(new Cover(i + 1, href.Replace(/*"https://www.google.com*/"/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
+                    }
+                    if (covers.Count > 10 || (i > 20 && covers.Count >= 5))
+                        break;
+                }
+
+                SearchCompleted?.Invoke(covers);
+            }
+
             try
             {
                 if (e.Url.AbsoluteUri.Contains(GOOGLE_IMAGE_URL))
                 {
-                    browser.Document.GetElementById("lst-ib").InnerText = query;
+                    WriteQuery();
+
                     await Task.Delay(200);
-                    browser.Document.All.GetElementsByName("btnG").ToList().Single().InvokeMember("click");
+
+                    ClickSearchButton();
+
+                    await Task.Delay(200);
                 }
                 else if (e.Url.AbsoluteUri.Contains(GOOGLE_SEARCH_RESULT))
                 {
                     await Task.Delay(500);
-                    var covers = new List<Cover>();
 
-                    var divs = browser.Document.All.ToList().Where(div => div.GetAttribute("className") == "rg_bx rg_di rg_el ivg-i").ToList();
-                    for (int i = 0; i < divs.Count; i++)
-                    {
-                        HtmlElement div = divs[i].All.ToList().Single(d => d.GetAttribute("className") == "rg_ilmbg" && d.InnerText.Contains('×'));
-                        string[] sizes = div.InnerText.Split('-')[0].Trim().Split('×');
-                        int x = Int32.Parse(sizes[0].Trim()),
-                            y = Int32.Parse(sizes[1].Trim());
-
-                        if (x == y && x >= 500)
-                        {
-                           string href = divs[i].GetElementsByTagName("a").ToList().First().GetAttribute("href");
-                            covers.Add(new Cover(i + 1, href.Replace(/*"https://www.google.com*/"/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
-                        }
-                        if (covers.Count > 10 || (i > 20 && covers.Count >= 5))
-                            break;
-                    }
-
-                    SearchCompleted?.Invoke(covers);
+                    ListCover();
                 }
             }
             catch(Exception ex)
