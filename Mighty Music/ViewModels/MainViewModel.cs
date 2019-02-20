@@ -92,12 +92,14 @@ namespace Mighty_Music.ViewModels
         }
         public ICommand BrowseCommand { get; }
         public ICommand ApplyCommand { get; }
+        public ICommand CancelCommand { get;  }
         public ICommand SkipCommand { get; }
 
         public MainViewModel()
         {
             BrowseCommand = new RelayCommand(Browse);
             ApplyCommand = new RelayCommand(Apply);
+            CancelCommand = new RelayCommand(Cancel);
             SkipCommand = new RelayCommand((arg) => Continue());
 
             SearchEngine.Initialize();
@@ -121,7 +123,7 @@ namespace Mighty_Music.ViewModels
 
         private void Apply(object obj)
         {
-            if (current != null && !Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (current != null)
             {
                 BusyName = current.Name;
                 IsBusy = true;
@@ -134,6 +136,8 @@ namespace Mighty_Music.ViewModels
 
             Continue();
         }
+
+        private void Cancel (object obj) => Continue();
 
         private void Continue()
         {

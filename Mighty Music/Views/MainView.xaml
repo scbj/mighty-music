@@ -205,7 +205,8 @@
                 </StackPanel>
             </Border>
 
-            <Button x:Name="btnApply" Grid.Row="5" Grid.ColumnSpan="2" Command="{Binding ApplyCommand}" Content="Appliquer"/>
+            <Button x:Name="btnCancel" Grid.Row="5" Grid.Column="0" Margin="0,0,12,0" Command="{Binding CancelCommand}" Content="Passer"/>
+            <Button x:Name="btnApply" Grid.Row="5" Grid.Column="1" Command="{Binding ApplyCommand}" Content="Appliquer"/>
         </Grid>
 
         <!--StatusBar on bottom-->

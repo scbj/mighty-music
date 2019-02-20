@@ -84,11 +84,15 @@ namespace Mighty_Music.Utils
 
                     if (x == y && x >= 500)
                     {
-                        string href = divs[i]
+                        HtmlElement a = divs[i]
                             .GetElementsByTagName("a")
                             .ToList()
-                            .Single(el => !el.GetAttribute("href").StartsWith("https://www.google.com/search?tbm"))
-                            .GetAttribute("href");
+                            .SingleOrDefault(el => !el.GetAttribute("href").StartsWith("https://www.google.com/search?tbm"));
+
+                        if (a == null)
+                            continue;
+
+                        string href = a.GetAttribute("href");
 
                         covers.Add(new Cover(i + 1, href.Replace(/*"https://www.google.com*/"/imgres?imgurl=", "").Split('&')[0].DecodeUrl()));
                     }
