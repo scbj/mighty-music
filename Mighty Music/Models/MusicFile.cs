@@ -29,26 +29,50 @@ namespace Mighty_Music.Models
             fileInfo = new FileInfo(path);
             ExtractMetadata();
         }
+
         public async Task Save()
         {
             Task<string> coverPath = DownloadAndSaveCoverAsync();
 
             using (var file = TagLib.File.Create(fileInfo.FullName))
             {
-                file.Tag.Performers = new string[] { Artist };
-                file.Tag.Title = Title;
-                file.Tag.Album = Album;
+                file.RemoveTags(TagLib.TagTypes.Id3v1);
+                file.RemoveTags(TagLib.TagTypes.Id3v2);
+                TagLib.Tag tag = file.GetTag(TagLib.TagTypes.Id3v2, true);
+
+                tag.Performers = new string[] { Artist };
+                tag.Title = Title;
+                tag.Album = Album;
                 await coverPath;
 
                 if (coverPath.Result != null)
-                    file.Tag.Pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
+                    tag.Pictures = new TagLib.IPicture[] { new TagLib.Picture(coverPath.Result) };
 
                 file.Save();
+                UpdateTimeAtOldestDate(fileInfo.FullName);
             }
 
-            var newPath = fileInfo.DirectoryName + "\\" + this.ToString().Remove(Path.GetInvalidFileNameChars()) + fileInfo.Extension;
+            string newPath = fileInfo.DirectoryName + "\\" + ToString().Remove(Path.GetInvalidFileNameChars()) + fileInfo.Extension;
             if (fileInfo.FullName != newPath)
                 fileInfo.MoveTo(newPath);
+        }
+
+        private void UpdateTimeAtOldestDate(string path)
+        {
+            var dates = new List<DateTime>
+            {
+                File.GetCreationTime(path),
+                File.GetLastAccessTime(path),
+                File.GetLastWriteTime(path)
+            };
+
+            // Get the oldest time from all
+            DateTime oldest = dates.Min();
+
+            // Update all the different time of the file to the oldest
+            File.SetCreationTime(path, oldest);
+            File.SetLastAccessTime(path, oldest);
+            File.SetLastWriteTime(path, oldest);
         }
 
         private void ExtractMetadata()
