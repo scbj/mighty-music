@@ -73,6 +73,7 @@ namespace Mighty_Music.Utils
         {
             var images = browser.Document.GetElementsByTagName("img").ToList()
                 .Where(el => el.GetAttribute("alt").StartsWith("Résultat de recherche d'images"))
+                .Take(50)
                 .ToList();
 
             var covers = new List<Cover>();
