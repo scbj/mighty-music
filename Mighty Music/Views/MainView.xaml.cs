@@ -1,4 +1,5 @@
-﻿using Mighty_Music.ViewModels;
+﻿using Mighty_Music.Models;
+using Mighty_Music.ViewModels;
 using MVVM.Pattern.View;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,26 @@ namespace Mighty_Music.Views
                 keyDown = false;
                 btnApply.Content = "Appliquer";
                 btnApply.Command = ViewModel.ApplyCommand;
+            }
+        }
+
+        private void Border_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(string)))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+        }
+
+        private void Border_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(string)))
+            {
+                string url = (string)e.Data.GetData(typeof(string));
+                ViewModel.Covers = new List<Cover>()
+                {
+                    new Cover(0, url)
+                };
             }
         }
     }

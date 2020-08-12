@@ -191,7 +191,7 @@
 
             <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8"><Run Text="Pochette"/></TextBlock>
             <ListBox x:Name="lsb_covers" Grid.Row="4" Grid.Column="1" Margin="0,8" ItemsSource="{Binding Covers, Mode=OneWay}"
-                     SelectedItem="{Binding SelectedCover}">
+                     SelectedItem="{Binding SelectedCover}"  AllowDrop="True"  DragEnter="Border_DragEnter" Drop="Border_Drop">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>

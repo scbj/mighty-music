@@ -169,7 +169,7 @@ namespace Mighty_Music.ViewModels
             OnPropertyChanged(nameof(RemainingCount));
             CurrentMusicFile = new MusicFileViewModel(new MusicFile(path));
 
-            SearchCover();
+            //SearchCover();
         }
 
         public void SearchCover()

@@ -72,7 +72,7 @@ namespace Mighty_Music.Utils
         private async static Task CrawlImages ()
         {
             var images = browser.Document.GetElementsByTagName("img").ToList()
-                .Where(el => el.GetAttribute("alt").StartsWith("Résultat de recherche d'images"))
+                .Where(el => el.GetAttribute("className").StartsWith("rg_i"))
                 .Take(50)
                 .ToList();
 
@@ -80,28 +80,37 @@ namespace Mighty_Music.Utils
 
             for (int i = 0; i < images.Count; i++)
             {
-                HtmlElement image = images[i];
+                try
+                {
+                    HtmlElement image = images[i];
 
-                // We want square images
-                if (image.ClientRectangle.Width != image.ClientRectangle.Height) continue;
+                    // We want square images
+                    if (image.ClientRectangle.Width != image.ClientRectangle.Height || image.ClientRectangle.Width < 100) continue;
 
 
-                // Open right pane viewer
-                image.InvokeMember("click");
-                await Task.Delay(350);
+                    // Open right pane viewer
+                    image.InvokeMember("click");
+                    await Task.Delay(350);
 
-                // Retreive new added attribute value and extract image url
-                string href = image.Parent.Parent.GetAttribute("href");
-                string encoded = href.Replace("/imgres?imgurl=", "").Split('&')[0];
+                    // Retreive new added attribute value and extract image url
+                    string href = image.Parent?.Parent?.GetAttribute("href");
+                    string encoded = href?.Replace("/imgres?imgurl=", "")?.Split('&')?[0];
 
-                var cover = new Cover(
-                    rank: i +1,
-                    url: encoded.DecodeUrl()
-                );
+                    if (href == null) continue;
 
-                covers.Add(cover);
+                    var cover = new Cover(
+                        rank: i + 1,
+                        url: encoded.DecodeUrl()
+                    );
 
-                if (covers.Count == 20) break;
+                    covers.Add(cover);
+
+                    if (covers.Count == 20) break;
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.ToString(), "Bof..");
+                }
             }
 
             SearchCompleted?.Invoke(covers);

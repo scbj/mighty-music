@@ -40,7 +40,7 @@ namespace Mighty_Music.Models
                 file.RemoveTags(TagLib.TagTypes.Id3v2);
                 TagLib.Tag tag = file.GetTag(TagLib.TagTypes.Id3v2, true);
 
-                tag.Performers = new string[] { Artist };
+                tag.Performers = Artist.Split(',');
                 tag.Title = Title;
                 tag.Album = Album;
                 await coverPath;
