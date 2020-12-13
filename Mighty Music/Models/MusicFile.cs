@@ -52,7 +52,7 @@ namespace Mighty_Music.Models
                 UpdateTimeAtOldestDate(fileInfo.FullName);
             }
 
-            string newPath = fileInfo.DirectoryName + "\\" + ToString().Remove(Path.GetInvalidFileNameChars()) + fileInfo.Extension;
+            string newPath = fileInfo.DirectoryName + "\\" + ToString() + fileInfo.Extension;
             if (fileInfo.FullName != newPath)
                 fileInfo.MoveTo(newPath);
         }
@@ -113,6 +113,6 @@ namespace Mighty_Music.Models
             return pathToSave;
         }
 
-        public override string ToString() => $"{Artist} - {Title}";
+        public override string ToString() => $"{Artist} - {Title}".Remove(Path.GetInvalidFileNameChars());
     }
 }
